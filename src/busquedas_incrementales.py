@@ -1,4 +1,4 @@
-from math import *
+from math import * 
 
 func = input("Enter function f(x) = ")
 x = float(input("Enter a value that will be the starting point X0: "))
