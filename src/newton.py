@@ -1,5 +1,5 @@
 from math import *
-import sympy as sym
+import sympy as sym 
 
 function=input("Enter a function (natural logarithm: log(), euler: exp()): ")
 x0=float(input("Enter a value that will be the starting point X0: "))
