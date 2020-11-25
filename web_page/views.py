@@ -74,6 +74,8 @@ def web_page_detail(request, pk):
         return web_page_detail15(request, pk)
     if pk==21:
         return web_page_detail16(request, pk)
+    if pk==22:
+        return web_page_detail20(request, pk)
     if pk==23:
         return web_page_detail19(request, pk)
         
