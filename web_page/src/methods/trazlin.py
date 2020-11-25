@@ -1,16 +1,15 @@
-from piv_par import Piv_par
+from .piv_par import Piv_par
 import numpy as np
 
 class TrazadoresLineales:
 
     def __init__(self, X, Y):
-        self.X = X
-        self.Y = Y
-        self.ln = len(X)
+        self.X = list(map(float, X.split(' ')))
+        self.Y = list(map(float, Y.split(' ')))
+        self.ln = len(self.X)
         self.m = 2*(self.ln - 1)
         self.A = self.A()
         self.b = list(map(lambda x: 0, range(self.m)))
-        self.title = ['Y'] + list(map(lambda x: 'dif(' + str(x) + ')', range(1, self.ln)))
         self.coef = np.zeros((self.ln-1,2)).tolist()
 
     def A(self):
@@ -33,7 +32,8 @@ class TrazadoresLineales:
                 cont = 0
         
 
-    def main(self):
+    def run(self):
+        trazadores = []
         for i in range(self.ln-1):
             if i == 0:
                 self.A[i+1][0] = self.X[i+1]
@@ -49,14 +49,11 @@ class TrazadoresLineales:
             self.aux(i)
             self.b[self.ln-1+i] = 0
         pp = Piv_par(self.A, self.b)
-        saux = pp.main()
+        A, saux = pp.run()
         for i in range(self.ln-1):
             self.coef[i][0] = saux[2*i]
             self.coef[i][1] = saux[2*i+1]
-        print('Trazadores:')
         for x in self.coef:
-            print(f'{x[0]:.6f}x + {x[1]:.6f}')
-
-if __name__ == "__main__":
-    TrazadoresLineales([-1, 0, 3, 4], [15.5, 3, 8, 1]).main()
-
+            trazadores.append(f'{x[0]:.6f}x + {x[1]:.6f}')
+        
+        return saux, trazadores

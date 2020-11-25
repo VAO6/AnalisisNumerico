@@ -50,5 +50,3 @@ class Multiple_roots:
                 break
             self.iterations_counter += 1
         return imprimir
-# rm=Multiple_roots('x**3', -3, 100, -8)
-# print(rm.run())

@@ -97,59 +97,67 @@ class LUParcial:
         return new_vector
 
     def run(self):
-        matrix = self.create_matrix(self.matrix)
-        matrix_l = self.matrix_l(matrix)
-        matrix_u = self.matrix_u(matrix)
-        matrix_p = self.matrix_p(matrix)
-
-        for i in range(len(matrix)):
-            for j in range(i+1, len(matrix)):
+        self.matrix = self.create_matrix(self.matrix)
+        matrix_l = self.matrix_l(self.matrix)
+        matrix_u = self.matrix_u(self.matrix)
+        matrix_p = self.matrix_p(self.matrix)
+        A = []
+        L = []
+        U = []
+        P = []
+        for i in range(len(self.matrix)):
+            for j in range(i+1, len(self.matrix)):
                 aux=0
-                if(abs(matrix[i][i])<abs(matrix[j][i])):
-                    self.change_lines(matrix,i,j)
+                if(abs(self.matrix[i][i])<abs(self.matrix[j][i])):
+                    self.change_lines(self.matrix,i,j)
                     self.change_lines(matrix_p,i,j)
                     if i != 0:
                         self.change_lines(matrix_l,i,j)
 
-            for p in range(i+1,len(matrix)):
-                multiplier = matrix[p][i]/matrix[i][i]
+            for p in range(i+1,len(self.matrix)):
+                multiplier = self.matrix[p][i]/self.matrix[i][i]
                 matrix_l[p][i] = multiplier
                 self.multiply_line(multiplier, p, i)
-            for x in range(i, len(matrix[0])):
-                matrix_u[i][x] = matrix[i][x]
-                if x+1 < len(matrix[0]):
-                    matrix_u[i+1][x+1] = matrix[i+1][x+1]
+            for x in range(i, len(self.matrix[0])):
+                matrix_u[i][x] = self.matrix[i][x]
+                if x+1 < len(self.matrix[0]):
+                    matrix_u[i+1][x+1] = self.matrix[i+1][x+1]
             print('Etapa ' + str(i) + '\n')
             print('A = [\n')
-            for x in range(len(matrix)):
-                for element in matrix[x]:
-                    print(f'{element:.6f}\t\t', sep=' ', end='')
-                print('\n')
-            print(']\n=====================\n')
+            for x in range(len(self.matrix)):
+                a = []
+                for element in self.matrix[x]:
+                    a.append(f'{element:.4f}')
+                if x == len(self.matrix) - 1:
+                    A.append(a)
             print('L = [\n')
-            for x in range(len(matrix)):
+            for x in range(len(self.matrix)):
+                l = []
                 for element in matrix_l[x]:
-                    print(f'{element:.6f}\t\t', sep=' ', end='')
-                print('\n')
-            print(']\n=====================\n')
+                    l.append(f'{element:.4f}')
+                if x == len(self.matrix) - 1:
+                    L.append(l)
             print('U = [\n')
-            for x in range(len(matrix)):
+            for x in range(len(self.matrix)):
+                u = []
                 for element in matrix_u[x]:
-                    print(f'{element:.6f}\t\t', sep=' ', end='')
-                print('\n')
+                    u.append(f'{element:.4f}')
+                if x == len(self.matrix) - 1:
+                    U.append(u)
             print('P = [\n')
-            for x in range(len(matrix)):
+            for x in range(len(self.matrix)):
+                p = []
                 for element in matrix_p[x]:
-                    print(f'{element:.6f}\t\t', sep=' ', end='')
-                print('\n')
-            print(']\n=====================\n')
+                    p.append(f'{element:.4f}')
+                if x == len(self.matrix) - 1:
+                    P.append(p)
+
 
         matrix_l = self.identity_l(matrix_l)
-        matrix_u[len(matrix)-1][len(matrix)-1] = matrix[len(matrix)-1][len(matrix)-1]
+        matrix_u[len(self.matrix)-1][len(self.matrix)-1] = self.matrix[len(self.matrix)-1][len(self.matrix)-1]
                     
         vector_b = self.vector_b(self.b)
         Pxb = self.multiply_matrix(matrix_p, vector_b)
         z = self.sustprog(matrix_l, Pxb)
         x = self.sustreg(matrix_u, z)
-        print('z = [\n', z, '\n]')
-        print('x = [\n', x, '\n]')
+        return A, L, U, P, z, x

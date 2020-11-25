@@ -52,6 +52,3 @@ class Secant:
 
             
         return imprimir
-
-sec=Secant('x-0.8-0.2*sin(x)',0,1.8,100,-4)
-print(sec.run())

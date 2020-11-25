@@ -58,7 +58,7 @@ class Piv_par:
                 for x in range(len(self.matrix)):
                     a = []
                     for element in self.matrix[x]:
-                        a.append(f'{element:.4f}')
+                        a.append(float(f'{element:.4f}'))
                     if x == len(self.matrix) - 1:
                         A.append(a)
                 

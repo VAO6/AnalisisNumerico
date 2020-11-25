@@ -130,14 +130,12 @@ class Gausseidel:
         cont=0
 
         T = []
-        print('T = [\n')
         for x in range(len(matrix_t)):
             t = []
             for element in matrix_t[x]:
                 t.append(f'{element:.6f}')
             T.append(t)
         C= []
-        print('C = [\n')
         for element in matrix_c:
             C.append(f'{element:.6f}')
         imprimir = ['| iter |      E     |']

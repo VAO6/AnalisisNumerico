@@ -1,12 +1,12 @@
-from piv_par import Piv_par
+from .piv_par import Piv_par
 import numpy as np
 
-class TrazadoresCuadrados:
+class TrazadoresCubicos:
 
     def __init__(self, X, Y):
-        self.X = X
-        self.Y = Y
-        self.ln = len(X)
+        self.X = list(map(float, X.split(' ')))
+        self.Y = list(map(float, Y.split(' ')))
+        self.ln = len(self.X)
         self.m = 4*(self.ln - 1)
         self.A = self.A()
         self.b = list(map(lambda x: 0, range(self.m)))
@@ -101,7 +101,8 @@ class TrazadoresCuadrados:
                 cont=1
     
 
-    def main(self):
+    def run(self):
+        trazadores = []
         for i in range(self.ln-1):
             if i == 0:
                 self.A[i+1][0] = self.X[i+1]**3
@@ -135,16 +136,13 @@ class TrazadoresCuadrados:
         self.A[self.m-1][self.m-3] = 2
         self.b[self.m-1] = 0
         pp = Piv_par(self.A, self.b)
-        saux = pp.main()
+        A, saux = pp.run()
         for i in range(self.ln-1):
             self.coef[i][0] = saux[4*i]
             self.coef[i][1] = saux[4*i+1]
             self.coef[i][2] = saux[4*i+2]
             self.coef[i][3] = saux[4*i+3]
-        print('Trazadores:')
         for x in self.coef:
-            print(f'{x[0]:.6f}x^3 + {x[1]:.6f}x^2 + {x[2]:.6f}x + {x[3]:.6f}')
+            trazadores.append(f'{x[0]:.6f}x^3 + {x[1]:.6f}x^2 + {x[2]:.6f}x + {x[3]:.6f}')
 
-if __name__ == "__main__":
-    TrazadoresCuadrados([-1, 0, 3, 4], [15.5, 3, 8, 1]).main()
-
+        return saux, trazadores

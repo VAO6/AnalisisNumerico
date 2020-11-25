@@ -75,6 +75,3 @@ class Fixed_Point:
             imprimir.append(f'{self.iterations_counter:^12}{xi:^12.6f}{fx:^12.6f}{self.error:^12.6f}')
             xaux = xi
         return imprimir
-
-# fp=Fixed_Point('x**3-x', 'x**3',-1,1, 100,-7)
-# print(fp.run())

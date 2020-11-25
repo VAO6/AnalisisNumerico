@@ -68,43 +68,43 @@ class LUSimple:
         return x_array
 
     def run(self):
-        matrix = self.create_matrix(self.matrix)
-        matrix_l = self.matrix_l(matrix)
-        matrix_u = self.matrix_u(matrix)
-
-        for i in range(len(matrix)):
-            for j in range(i+1, len(matrix)):
-                multiplier = matrix[j][i]/matrix[i][i]
+        self.matrix = self.create_matrix(self.matrix)
+        matrix_l = self.matrix_l(self.matrix)
+        matrix_u = self.matrix_u(self.matrix)
+        A = []
+        L = []
+        U = []
+        for i in range(len(self.matrix)):
+            for j in range(i+1, len(self.matrix)):
+                multiplier = self.matrix[j][i]/self.matrix[i][i]
                 matrix_l[j][i] = multiplier
                 self.multiply_line(multiplier, j, i)
-            for x in range(i, len(matrix[0])):
-                matrix_u[i][x] = matrix[i][x]
-                if x+1 < len(matrix[0]):
-                    matrix_u[i+1][x+1] = matrix[i+1][x+1]
-            print('Etapa ' + str(i) + '\n')
-            print('A = [\n')
-            for x in range(len(matrix)):
-                for element in matrix[x]:
-                    print(f'{element:.6f}\t\t', sep=' ', end='')
-                print('\n')
-            print(']\n=====================\n')
-            print('L = [\n')
-            for x in range(len(matrix)):
+            for x in range(i, len(self.matrix[0])):
+                matrix_u[i][x] = self.matrix[i][x]
+                if x+1 < len(self.matrix[0]):
+                    matrix_u[i+1][x+1] = self.matrix[i+1][x+1]
+            for x in range(len(self.matrix)):
+                a = []
+                for element in self.matrix[x]:
+                    a.append(f'{element:.4f}')
+                if x == len(self.matrix) - 1:
+                    A.append(a)
+            for x in range(len(self.matrix)):
+                l = []
                 for element in matrix_l[x]:
-                    print(f'{element:.6f}\t\t', sep=' ', end='')
-                print('\n')
-            print(']\n=====================\n')
-            print('U = [\n')
-            for x in range(len(matrix)):
+                    l.append(f'{element:.4f}')
+                if x == len(self.matrix) - 1:
+                    L.append(l)
+            for x in range(len(self.matrix)):
+                u = []
                 for element in matrix_u[x]:
-                    print(f'{element:.6f}\t\t', sep=' ', end='')
-                print('\n')
-            print(']\n=====================\n')
+                    u.append(f'{element:.4f}')
+                if x == len(self.matrix) - 1:
+                    U.append(u)
 
-        matrix_u[len(matrix)-1][len(matrix)-1] = matrix[len(matrix)-1][len(matrix)-1]
+        matrix_u[len(self.matrix)-1][len(self.matrix)-1] = self.matrix[len(self.matrix)-1][len(self.matrix)-1]
                     
         vector_b = self.vector_b(self.b)
         z = self.sustprog(matrix_l, vector_b)
         x = self.sustreg(matrix_u, z)
-        print('z = [\n', z, '\n]')
-        print('x = [\n', x, '\n]')
+        return A, L, U, z, x
