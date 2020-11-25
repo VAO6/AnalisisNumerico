@@ -58,13 +58,4 @@ class Secant:
             self.a = self.b
             self.b = aux
             
-<<<<<<< HEAD
-
-            
         return imprimir
-=======
-        return imprimir
-
-# sec=Secant('exp(2*x)-2*(x**3)*exp(x)+x**6',2.16,1,100,-7)
-# print(sec.run())
->>>>>>> 045ce377bea2207df1ae0fb660abc5687e7053f3
