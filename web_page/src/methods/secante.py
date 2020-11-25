@@ -28,7 +28,16 @@ class Secant:
         x = parameter
         res = eval(self.function)
         return res
-        
+
+    #  def condition(self):
+    #     if self.evaluate(self.a) - self.evaluate(self.b) != 0:
+    #         return False
+    #     return True
+
+    # if not self.condition():
+    #         imprimir.append('Error -> Doesnt pass the minimum conditions.')
+    #         return imprimir
+
     def run(self):       
         imprimir = [' Iteration       x0          x1         f(x)       error    ']
         self.replace()
@@ -49,6 +58,13 @@ class Secant:
             self.a = self.b
             self.b = aux
             
+<<<<<<< HEAD
 
             
         return imprimir
+=======
+        return imprimir
+
+# sec=Secant('exp(2*x)-2*(x**3)*exp(x)+x**6',2.16,1,100,-7)
+# print(sec.run())
+>>>>>>> 045ce377bea2207df1ae0fb660abc5687e7053f3
