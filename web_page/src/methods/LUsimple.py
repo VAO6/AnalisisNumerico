@@ -1,3 +1,4 @@
+from math import *
 class LUSimple:
     def __init__(self, matrix, vector):
         self.matrix = matrix

@@ -1,6 +1,6 @@
 from .piv_par import Piv_par
 import numpy as np
-
+from math import *
 class TrazadoresCuadrados:
 
     def __init__(self, X, Y):

@@ -1,3 +1,4 @@
+from math import *
 class Piv_tot:
     def __init__(self, matrix, vector):
         self.matrix = matrix

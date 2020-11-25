@@ -1,3 +1,4 @@
+from math import *
 class diferenciasDivididas:
 
     def __init__(self, X, Y):

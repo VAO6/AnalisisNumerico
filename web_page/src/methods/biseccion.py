@@ -1,3 +1,4 @@
+from math import *
 class Biseccion:
     def __init__(self, function, a, b, iterations, error):
         self.function = function

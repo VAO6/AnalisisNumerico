@@ -1,3 +1,4 @@
+from math import *
 class Gauss:
     def __init__(self, matrix, b):
         self.matrix=matrix

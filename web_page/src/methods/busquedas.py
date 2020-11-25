@@ -1,3 +1,4 @@
+from math import *
 class Busquedas:
     def __init__(self, function, x, delta, iterations):
         self.func = function

@@ -1,3 +1,4 @@
+from math import *
 class ReglaFalsa:
     def __init__(self, function, a, b, iterations, error):
         self.function = function

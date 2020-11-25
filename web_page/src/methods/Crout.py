@@ -1,4 +1,5 @@
 import numpy as np
+from math import *
 class Crout:
 
     def __init__(self,matrix,b):

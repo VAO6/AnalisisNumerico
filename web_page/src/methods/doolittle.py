@@ -1,5 +1,5 @@
 import numpy as np
-
+from math import *
 class Doolittle:
 
     def __init__(self,matrix,b):

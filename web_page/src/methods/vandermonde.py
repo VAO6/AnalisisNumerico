@@ -1,3 +1,4 @@
+from math import *
 from .piv_par import Piv_par
 class Vandermonde:
 

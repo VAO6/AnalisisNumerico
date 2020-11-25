@@ -1,3 +1,4 @@
+from math import *
 import numpy as np
 from numpy.linalg import inv
 from numpy import linalg as LA

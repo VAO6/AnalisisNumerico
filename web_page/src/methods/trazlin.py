@@ -1,5 +1,6 @@
 from .piv_par import Piv_par
 import numpy as np
+from math import *
 
 class TrazadoresLineales:
 
